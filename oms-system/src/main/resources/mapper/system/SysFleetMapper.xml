@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydgj.oms.system.mapper.SysFleetMapper">
+    
+    <resultMap type="SysFleet" id="SysFleetResult">
+        <result property="fleetId"    column="fleet_id"    />
+        <result property="fleetName"    column="fleet_name"    />
+        <result property="responsibleMan"    column="responsible_man"    />
+        <result property="responsibleManPhone"    column="responsible_man_phone"    />
+        <result property="licensePlateNumber"    column="license_plate_number"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysFleetVo">
+        select fleet_id, fleet_name, responsible_man, responsible_man_phone, license_plate_number, create_by, create_time, update_by, update_time, remark from sys_fleet
+    </sql>
+
+    <select id="selectSysFleetList" parameterType="SysFleet" resultMap="SysFleetResult">
+        <include refid="selectSysFleetVo"/>
+        <where>  
+            <if test="fleetName != null  and fleetName != ''"> and fleet_name like concat('%', #{fleetName}, '%')</if>
+            <if test="responsibleMan != null  and responsibleMan != ''"> and responsible_man = #{responsibleMan}</if>
+            <if test="responsibleManPhone != null  and responsibleManPhone != ''"> and responsible_man_phone = #{responsibleManPhone}</if>
+            <if test="licensePlateNumber != null  and licensePlateNumber != ''"> and license_plate_number = #{licensePlateNumber}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysFleetByFleetId" parameterType="Long" resultMap="SysFleetResult">
+        <include refid="selectSysFleetVo"/>
+        where fleet_id = #{fleetId}
+    </select>
+        
+    <insert id="insertSysFleet" parameterType="SysFleet" useGeneratedKeys="true" keyProperty="fleetId">
+        insert into sys_fleet
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fleetName != null">fleet_name,</if>
+            <if test="responsibleMan != null">responsible_man,</if>
+            <if test="responsibleManPhone != null">responsible_man_phone,</if>
+            <if test="licensePlateNumber != null">license_plate_number,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fleetName != null">#{fleetName},</if>
+            <if test="responsibleMan != null">#{responsibleMan},</if>
+            <if test="responsibleManPhone != null">#{responsibleManPhone},</if>
+            <if test="licensePlateNumber != null">#{licensePlateNumber},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysFleet" parameterType="SysFleet">
+        update sys_fleet
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fleetName != null">fleet_name = #{fleetName},</if>
+            <if test="responsibleMan != null">responsible_man = #{responsibleMan},</if>
+            <if test="responsibleManPhone != null">responsible_man_phone = #{responsibleManPhone},</if>
+            <if test="licensePlateNumber != null">license_plate_number = #{licensePlateNumber},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where fleet_id = #{fleetId}
+    </update>
+
+    <delete id="deleteSysFleetByFleetId" parameterType="Long">
+        delete from sys_fleet where fleet_id = #{fleetId}
+    </delete>
+
+    <delete id="deleteSysFleetByFleetIds" parameterType="String">
+        delete from sys_fleet where fleet_id in 
+        <foreach item="fleetId" collection="array" open="(" separator="," close=")">
+            #{fleetId}
+        </foreach>
+    </delete>
+
+    <select id="selectFleetAll" resultMap="SysFleetResult">
+        <include refid="selectSysFleetVo"/>
+    </select>
+
+    <select id="selectSysFleetByFleetName" parameterType="String" resultMap="SysFleetResult">
+        <include refid="selectSysFleetVo"/>
+        where fleet_name = #{fleetName}
+    </select>
+</mapper>

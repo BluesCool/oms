@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydgj.oms.system.mapper.SysImportReceivePaymentMapper">
+    
+    <resultMap type="SysImportReceivePayment" id="SysImportReceivePaymentResult">
+        <result property="importReceivePaymentId"    column="import_receive_payment_id"    />
+        <result property="importOrderId"    column="import_order_id"    />
+        <result property="agencyCustomsFee"    column="agency_customs_fee"    />
+        <result property="agentInspectionFee"    column="agent_inspection_fee"    />
+        <result property="replacementFee"    column="replacement_fee"    />
+        <result property="customsClearanceFee"    column="customs_clearance_fee"    />
+        <result property="storageFee"    column="storage_fee"    />
+        <result property="agency3cFee"    column="agency_3C_fee"    />
+        <result property="consolidationFee"    column="consolidation_fee"    />
+        <result property="customsInspectionFee"    column="customs_inspection_fee"    />
+        <result property="inspectionQuarantineFee"    column="inspection_quarantine_fee"    />
+        <result property="inlandDeliverFee"    column="inland_deliver_fee"    />
+        <result property="threeInspectionFee"    column="three_inspection_fee"    />
+        <result property="handlingFee"    column="handling_fee"    />
+        <result property="invoiceAmount"    column="invoice_amount"    />
+        <result property="advanceFee"    column="advance_fee"    />
+        <result property="vat"    column="vat"    />
+        <result property="totalPayment"    column="total_payment"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <association property="importOrder" column="import_order_id" javaType="SysImportOrder" resultMap="importOrderResult" />
+        <association property="org" column="org_id" javaType="SysOrg" resultMap="orgResult"/>
+        <association property="tradeWay" column="trade_way_id" javaType="SysTradeWay" resultMap="tradeWayResult"/>
+        <association property="currency" column="currency_id" javaType="SysCurrency" resultMap="currencyResult"/>
+        <association property="check" column="check_id" javaType="SysCheck" resultMap="checkResult"/>
+        <association property="fleet" column="fleet_id" javaType="SysFleet" resultMap="fleetResult"/>
+        <association property="customsBroker" column="customs_broker_id" javaType="SysCustomsBroker" resultMap="customsBrokerResult"/>
+    </resultMap>
+
+    <resultMap type="SysImportOrder" id="importOrderResult">
+        <result property="importOrderId"    column="import_order_id"    />
+        <result property="orgId"    column="org_id"    />
+        <result property="masterOrder"    column="master_order"    />
+        <result property="branchOrder"    column="branch_order"    />
+        <result property="quantity"    column="quantity"    />
+        <result property="productQuantity"    column="product_quantity"    />
+        <result property="weight"    column="weight"    />
+        <result property="tradeWayId"    column="trade_way_id"    />
+        <result property="manualNumber"    column="manual_number"    />
+        <result property="currencyId"    column="currency_id"    />
+        <result property="amountDeclared"    column="amount_declared"    />
+        <result property="certificateNameC"    column="certificate_name_c"    />
+        <result property="checkId"    column="check_id"    />
+        <result property="tax"    column="tax"    />
+        <result property="customsCode"    column="customs_code"    />
+        <result property="orderDate"    column="order_date"    />
+        <result property="releaseDate"    column="release_date"    />
+        <result property="serialNumber"    column="serial_number"    />
+        <result property="fleetId"    column="fleet_id"    />
+        <result property="customsBrokerId"    column="customs_broker_id"    />
+        <result property="flightNumber"    column="flight_number"    />
+        <result property="dispatchNumber"    column="dispatch_number"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <association property="org" column="org_id" javaType="SysOrg" resultMap="orgResult"/>
+        <association property="tradeWay" column="trade_way_id" javaType="SysTradeWay" resultMap="tradeWayResult"/>
+        <association property="currency" column="currency_id" javaType="SysCurrency" resultMap="currencyResult"/>
+        <association property="check" column="check_id" javaType="SysCheck" resultMap="checkResult"/>
+        <association property="fleet" column="fleet_id" javaType="SysFleet" resultMap="fleetResult"/>
+        <association property="customsBroker" column="customs_broker_id" javaType="SysCustomsBroker" resultMap="customsBrokerResult"/>
+        </resultMap>
+
+    <resultMap type="SysCheck" id="checkResult">
+        <result property="checkId" column="check_id"/>
+        <result property="checkName" column="check_name"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <resultMap type="SysCurrency" id="currencyResult">
+        <result property="currencyId"    column="currency_id"    />
+        <result property="currencyName"    column="currency_name"    />
+        <result property="currencyCode"    column="currency_code"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <resultMap type="SysCustomsBroker" id="customsBrokerResult">
+        <result property="customsBrokerId"    column="customs_broker_id"    />
+        <result property="customsBrokerName"    column="customs_broker_name"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <resultMap type="SysFleet" id="fleetResult">
+        <result property="fleetId"    column="fleet_id"    />
+        <result property="fleetName"    column="fleet_name"    />
+        <result property="responsibleMan"    column="responsible_man"    />
+        <result property="responsibleManPhone"    column="responsible_man_phone"    />
+        <result property="licensePlateNumber"    column="license_plate_number"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <resultMap type="SysOrg" id="orgResult">
+        <result property="orgId"    column="org_id"    />
+        <result property="orgName"    column="org_name"    />
+        <result property="orgShort"    column="org_short"    />
+        <result property="address"    column="address"    />
+        <result property="postCode"    column="post_code"    />
+        <result property="telephone"    column="telephone"    />
+        <result property="description"    column="description"    />
+        <result property="corporation"    column="corporation"    />
+        <result property="corporationPhone"    column="corporation_phone"    />
+        <result property="corporationIdCard"    column="corporation_id_card"    />
+        <result property="registeredAddress"    column="registered_address"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="county"    column="county"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <resultMap type="SysTradeWay" id="tradeWayResult">
+        <result property="tradeWayId"    column="trade_way_id"    />
+        <result property="tradeWayName"    column="trade_way_name"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysImportReceivePaymentVo">
+        select irp.import_receive_payment_id, irp.import_order_id, irp.agency_customs_fee, irp.agent_inspection_fee, irp.replacement_fee, irp.customs_clearance_fee, irp.storage_fee, irp.agency_3C_fee, irp.consolidation_fee, irp.customs_inspection_fee, irp.inspection_quarantine_fee, irp.inland_deliver_fee, irp.invoice_amount, irp.advance_fee, irp.total_payment, irp.status, irp.create_by, irp.create_time, irp.update_by, irp.update_time, irp.remark, irp.three_inspection_fee, irp.handling_fee,irp.vat,
+               io.import_order_id, io.org_id, io.master_order, io.branch_order, io.quantity, io.weight, io.trade_way_id, io.currency_id, io.amount_declared, io.certificate_name_c, io.check_id, io.tax, io.customs_code, io.release_date, io.serial_number, io.fleet_id, io.customs_broker_id, io.create_by, io.create_time, io.update_by, io.update_time, io.remark,io.product_quantity, io.manual_number, io.order_date,io.flight_number, io.dispatch_number,
+               tw.trade_way_id, tw.trade_way_name, tw.remark,
+               o.org_id, o.org_name, o.remark,
+               f.fleet_id, f.fleet_name, f.remark,
+               cb.customs_broker_id, cb.customs_broker_name, cb.remark,
+               cy.currency_id, cy.currency_name, cy.remark ,
+            ck.check_id, ck.check_name, ck.remark
+        from sys_import_receive_payment irp
+        left join sys_import_order io on irp.import_order_id = io.import_order_id
+        left join sys_trade_way tw on tw.trade_way_id = io.trade_way_id
+        left join sys_org o on o.org_id = io.org_id
+        left join sys_fleet f on f.fleet_id = io.fleet_id
+        left join sys_customs_broker cb on cb.customs_broker_id = io.customs_broker_id
+        left join sys_currency cy on cy.currency_id = io.currency_id
+        left join sys_check ck on ck.check_id = io.check_id
+    </sql>
+
+    <select id="selectSysImportReceivePaymentList" parameterType="SysImportReceivePayment" resultMap="SysImportReceivePaymentResult">
+        <include refid="selectSysImportReceivePaymentVo"/>
+        <where>
+            <if test="importOrderId != null "> and irp.import_order_id = #{importOrderId}</if>
+            <if test="params.branchOrder != null "> and io.branch_order = #{branchOrder}</if>
+            <if test="params.masterOrder != null "> and io.master_order = #{masterOrder}</if>
+            <if test="agencyCustomsFee != null "> and irp.agency_customs_fee = #{agencyCustomsFee}</if>
+            <if test="agentInspectionFee != null "> and irp.agent_inspection_fee = #{agentInspectionFee}</if>
+            <if test="replacementFee != null "> and irp.replacement_fee = #{replacementFee}</if>
+            <if test="customsClearanceFee != null "> and irp.customs_clearance_fee = #{customsClearanceFee}</if>
+            <if test="storageFee != null "> and irp.storage_fee = #{storageFee}</if>
+            <if test="agency3cFee != null "> and irp.agency_3C_fee = #{agency3cFee}</if>
+            <if test="consolidationFee != null "> and irp.consolidation_fee = #{consolidationFee}</if>
+            <if test="customsInspectionFee != null "> and irp.customs_inspection_fee = #{customsInspectionFee}</if>
+            <if test="inspectionQuarantineFee != null "> and irp.inspection_quarantine_fee = #{inspectionQuarantineFee}</if>
+            <if test="inlandDeliverFee != null "> and irp.inland_deliver_fee = #{inlandDeliverFee}</if>
+            <if test="invoiceAmount != null "> and irp.invoice_amount = #{invoiceAmount}</if>
+            <if test="advanceFee != null "> and irp.advance_fee = #{advanceFee}</if>
+            <if test="totalPayment != null "> and irp.total_payment = #{totalPayment}</if>
+            <if test="status != null  and status != ''"> and irp.status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysImportReceivePaymentByImportReceivePaymentId" parameterType="Long" resultMap="SysImportReceivePaymentResult">
+        <include refid="selectSysImportReceivePaymentVo"/>
+        where irp.import_receive_payment_id = #{importReceivePaymentId}
+    </select>
+        
+    <insert id="insertSysImportReceivePayment" parameterType="SysImportReceivePayment" useGeneratedKeys="true" keyProperty="importReceivePaymentId">
+        insert into sys_import_receive_payment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="importOrderId != null">import_order_id,</if>
+            <if test="agencyCustomsFee != null">agency_customs_fee,</if>
+            <if test="agentInspectionFee != null">agent_inspection_fee,</if>
+            <if test="replacementFee != null">replacement_fee,</if>
+            <if test="customsClearanceFee != null">customs_clearance_fee,</if>
+            <if test="storageFee != null">storage_fee,</if>
+            <if test="agency3cFee != null">agency_3C_fee,</if>
+            <if test="consolidationFee != null">consolidation_fee,</if>
+            <if test="customsInspectionFee != null">customs_inspection_fee,</if>
+            <if test="inspectionQuarantineFee != null">inspection_quarantine_fee,</if>
+            <if test="inlandDeliverFee != null">inland_deliver_fee,</if>
+            <if test="threeInspectionFee != null">three_inspection_fee,</if>
+            <if test="handlingFee != null">handling_fee,</if>
+            <if test="invoiceAmount != null">invoice_amount,</if>
+            <if test="advanceFee != null">advance_fee,</if>
+            <if test="vat != null">vat,</if>
+            <if test="totalPayment != null">total_payment,</if>
+            <if test="status != null">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="importOrderId != null">#{importOrderId},</if>
+            <if test="agencyCustomsFee != null">#{agencyCustomsFee},</if>
+            <if test="agentInspectionFee != null">#{agentInspectionFee},</if>
+            <if test="replacementFee != null">#{replacementFee},</if>
+            <if test="customsClearanceFee != null">#{customsClearanceFee},</if>
+            <if test="storageFee != null">#{storageFee},</if>
+            <if test="agency3cFee != null">#{agency3cFee},</if>
+            <if test="consolidationFee != null">#{consolidationFee},</if>
+            <if test="customsInspectionFee != null">#{customsInspectionFee},</if>
+            <if test="inspectionQuarantineFee != null">#{inspectionQuarantineFee},</if>
+            <if test="inlandDeliverFee != null">#{inlandDeliverFee},</if>
+            <if test="threeInspectionFee != null">#{threeInspectionFee},</if>
+            <if test="handlingFee != null">#{handlingFee},</if>
+            <if test="invoiceAmount != null">#{invoiceAmount},</if>
+            <if test="advanceFee != null">#{advanceFee},</if>
+            <if test="vat != null">vat,</if>
+            <if test="totalPayment != null">#{totalPayment},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysImportReceivePayment" parameterType="SysImportReceivePayment">
+        update sys_import_receive_payment
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="importOrderId != null">import_order_id = #{importOrderId},</if>
+            <if test="agencyCustomsFee != null">agency_customs_fee = #{agencyCustomsFee},</if>
+            <if test="agentInspectionFee != null">agent_inspection_fee = #{agentInspectionFee},</if>
+            <if test="replacementFee != null">replacement_fee = #{replacementFee},</if>
+            <if test="customsClearanceFee != null">customs_clearance_fee = #{customsClearanceFee},</if>
+            <if test="storageFee != null">storage_fee = #{storageFee},</if>
+            <if test="agency3cFee != null">agency_3C_fee = #{agency3cFee},</if>
+            <if test="consolidationFee != null">consolidation_fee = #{consolidationFee},</if>
+            <if test="customsInspectionFee != null">customs_inspection_fee = #{customsInspectionFee},</if>
+            <if test="inspectionQuarantineFee != null">inspection_quarantine_fee = #{inspectionQuarantineFee},</if>
+            <if test="inlandDeliverFee != null">inland_deliver_fee = #{inlandDeliverFee},</if>
+            <if test="threeInspectionFee != null">three_inspection_fee = #{threeInspectionFee},</if>
+            <if test="handlingFee != null">handling_fee = #{handlingFee},</if>
+            <if test="invoiceAmount != null">invoice_amount = #{invoiceAmount},</if>
+            <if test="advanceFee != null">advance_fee = #{advanceFee},</if>
+            <if test="vat != null">vat= #{vat},</if>
+            <if test="totalPayment != null">total_payment = #{totalPayment},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            update_time = sysdate()
+        </trim>
+        where import_receive_payment_id = #{importReceivePaymentId}
+    </update>
+
+    <delete id="deleteSysImportReceivePaymentByImportReceivePaymentId" parameterType="Long">
+        delete from sys_import_receive_payment where import_receive_payment_id = #{importReceivePaymentId}
+    </delete>
+
+    <delete id="deleteSysImportReceivePaymentByImportReceivePaymentIds" parameterType="String">
+        delete from sys_import_receive_payment where import_receive_payment_id in 
+        <foreach item="importReceivePaymentId" collection="array" open="(" separator="," close=")">
+            #{importReceivePaymentId}
+        </foreach>
+    </delete>
+
+    <select id="selectIdsByImportOderIds" resultType="java.lang.Long">
+        select import_receive_payment_id
+        from sys_import_receive_payment
+        where import_order_id in
+        <foreach item="importOrderId" collection="array" open="(" separator="," close=")">
+            #{importOrderId}
+        </foreach>
+    </select>
+
+    <delete id="deleteSysImportReceivePaymentByImportOrders">
+        delete from sys_import_receive_payment where import_order_id in
+        <foreach item="importOrderId" collection="array" open="(" separator="," close=")">
+            #{importOrderId}
+        </foreach>
+    </delete>
+</mapper>

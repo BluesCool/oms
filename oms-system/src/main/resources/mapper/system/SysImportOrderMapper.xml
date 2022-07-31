@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydgj.oms.system.mapper.SysImportOrderMapper">
+    
+    <resultMap type="SysImportOrder" id="SysImportOrderResult">
+        <result property="importOrderId"    column="import_order_id"    />
+        <result property="orgId"    column="org_id"    />
+        <result property="masterOrder"    column="master_order"    />
+        <result property="branchOrder"    column="branch_order"    />
+        <result property="quantity"    column="quantity"    />
+        <result property="productQuantity"    column="product_quantity"    />
+        <result property="weight"    column="weight"    />
+        <result property="tradeWayId"    column="trade_way_id"    />
+        <result property="manualNumber"    column="manual_number"    />
+        <result property="currencyId"    column="currency_id"    />
+        <result property="amountDeclared"    column="amount_declared"    />
+        <result property="certificateNameC"    column="certificate_name_c"    />
+        <result property="checkId"    column="check_id"    />
+        <result property="tax"    column="tax"    />
+        <result property="customsCode"    column="customs_code"    />
+        <result property="orderDate"    column="order_date"    />
+        <result property="releaseDate"    column="release_date"    />
+        <result property="serialNumber"    column="serial_number"    />
+        <result property="flightNumber"    column="flight_number"    />
+        <result property="dispatchNumber"    column="dispatch_number"    />
+        <result property="fleetId"    column="fleet_id"    />
+        <result property="customsBrokerId"    column="customs_broker_id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <association property="org" column="org_id" javaType="SysOrg" resultMap="orgResult"/>
+        <association property="tradeWay" column="trade_way_id" javaType="SysTradeWay" resultMap="tradeWayResult"/>
+        <association property="currency" column="currency_id" javaType="SysCurrency" resultMap="currencyResult"/>
+        <association property="check" column="check_id" javaType="SysCheck" resultMap="checkResult"/>
+        <association property="fleet" column="fleet_id" javaType="SysFleet" resultMap="fleetResult"/>
+        <association property="customsBroker" column="customs_broker_id" javaType="SysCustomsBroker" resultMap="customsBrokerResult"/>
+    </resultMap>
+
+    <resultMap type="SysCheck" id="checkResult">
+        <result property="checkId" column="check_id"/>
+        <result property="checkName" column="check_name"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <resultMap type="SysCurrency" id="currencyResult">
+        <result property="currencyId"    column="currency_id"    />
+        <result property="currencyName"    column="currency_name"    />
+        <result property="currencyCode"    column="currency_code"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <resultMap type="SysCustomsBroker" id="customsBrokerResult">
+        <result property="customsBrokerId"    column="customs_broker_id"    />
+        <result property="customsBrokerName"    column="customs_broker_name"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <resultMap type="SysFleet" id="fleetResult">
+        <result property="fleetId"    column="fleet_id"    />
+        <result property="fleetName"    column="fleet_name"    />
+        <result property="responsibleMan"    column="responsible_man"    />
+        <result property="responsibleManPhone"    column="responsible_man_phone"    />
+        <result property="licensePlateNumber"    column="license_plate_number"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <resultMap type="SysOrg" id="orgResult">
+        <result property="orgId"    column="org_id"    />
+        <result property="orgName"    column="org_name"    />
+        <result property="orgShort"    column="org_short"    />
+        <result property="address"    column="address"    />
+        <result property="postCode"    column="post_code"    />
+        <result property="telephone"    column="telephone"    />
+        <result property="description"    column="description"    />
+        <result property="corporation"    column="corporation"    />
+        <result property="corporationPhone"    column="corporation_phone"    />
+        <result property="corporationIdCard"    column="corporation_id_card"    />
+        <result property="registeredAddress"    column="registered_address"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="county"    column="county"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <resultMap type="SysTradeWay" id="tradeWayResult">
+        <result property="tradeWayId"    column="trade_way_id"    />
+        <result property="tradeWayName"    column="trade_way_name"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysImportOrderVo">
+        select io.import_order_id, io.org_id, io.master_order, io.branch_order,
+               io.quantity, io.weight, io.trade_way_id, io.currency_id, io.amount_declared,
+               io.certificate_name_c, io.check_id, io.tax, io.customs_code, io.release_date,
+               io.serial_number, io.fleet_id, io.customs_broker_id, io.create_by, io.create_time,
+               io.update_by, io.update_time, io.remark,io.product_quantity, io.manual_number, io.order_date,
+               io.flight_number, io.dispatch_number,
+                tw.trade_way_id, tw.trade_way_name, tw.remark,
+                o.org_id, o.org_name, o.remark,
+                f.fleet_id, f.fleet_name, f.remark,
+                cb.customs_broker_id, cb.customs_broker_name, cb.remark,
+                cy.currency_id, cy.currency_name, cy.remark,
+                ck.check_id, ck.check_name, ck.remark
+        from sys_import_order io
+        left join sys_trade_way tw on tw.trade_way_id = io.trade_way_id
+        left join sys_org o on o.org_id = io.org_id
+        left join sys_fleet f on f.fleet_id = io.fleet_id
+        left join sys_customs_broker cb on cb.customs_broker_id = io.customs_broker_id
+        left join sys_currency cy on cy.currency_id = io.currency_id
+        left join sys_check ck on ck.check_id = io.check_id
+    </sql>
+
+    <select id="selectSysImportOrderList" parameterType="SysImportOrder" resultMap="SysImportOrderResult">
+        <include refid="selectSysImportOrderVo"/>
+        <where>  
+            <if test="orgId != null "> and io.org_id = #{orgId}</if>
+            <if test="masterOrder != null  and masterOrder != ''"> and io.master_order = #{masterOrder}</if>
+            <if test="branchOrder != null  and branchOrder != ''"> and io.branch_order = #{branchOrder}</if>
+            <if test="quantity != null "> and io.quantity = #{quantity}</if>
+            <if test="weight != null "> and io.weight = #{weight}</if>
+            <if test="tradeWayId != null "> and io.trade_way_id = #{tradeWayId}</if>
+            <if test="currencyId != null "> and io.currency_id = #{currencyId}</if>
+            <if test="amountDeclared != null "> and io.amount_declared = #{amountDeclared}</if>
+            <if test="certificateNameC != null  and certificateNameC != ''"> and io.certificate_name_c = #{certificateNameC}</if>
+            <if test="checkId != null "> and io.check_id = #{checkId}</if>
+            <if test="tax != null "> and io.tax = #{tax}</if>
+            <if test="customsCode != null  and customsCode != ''"> and io.customs_code = #{customsCode}</if>
+            <if test="releaseDate != null "> and io.release_date = #{releaseDate}</if>
+            <if test="serialNumber != null  and serialNumber != ''"> and io.serial_number = #{serialNumber}</if>
+            <if test="fleetId != null "> and io.fleet_id = #{fleetId}</if>
+            <if test="customsBrokerId != null "> and io.customs_broker_id = #{customsBrokerId}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysImportOrderByImportOrderId" parameterType="Long" resultMap="SysImportOrderResult">
+        <include refid="selectSysImportOrderVo"/>
+        where io.import_order_id = #{importOrderId}
+    </select>
+        
+    <insert id="insertSysImportOrder" parameterType="SysImportOrder" useGeneratedKeys="true" keyProperty="importOrderId">
+        insert into sys_import_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orgId != null">org_id,</if>
+            <if test="masterOrder != null">master_order,</if>
+            <if test="branchOrder != null">branch_order,</if>
+            <if test="quantity != null">quantity,</if>
+            <if test="productQuantity != null">product_quantity,</if>
+            <if test="weight != null">weight,</if>
+            <if test="tradeWayId != null">trade_way_id,</if>
+            <if test="manualNumber != null">manual_number,</if>
+            <if test="currencyId != null">currency_id,</if>
+            <if test="amountDeclared != null">amount_declared,</if>
+            <if test="certificateNameC != null">certificate_name_c,</if>
+            <if test="checkId != null">check_id,</if>
+            <if test="tax != null">tax,</if>
+            <if test="customsCode != null">customs_code,</if>
+            <if test="orderDate != null">order_date,</if>
+            <if test="releaseDate != null">release_date,</if>
+            <if test="serialNumber != null">serial_number,</if>
+            <if test="fleetId != null">fleet_id,</if>
+            <if test="customsBrokerId != null">customs_broker_id,</if>
+            <if test="flightNumber != null">flight_number,</if>
+            <if test="dispatchNumber != null">dispatch_number,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orgId != null">#{orgId},</if>
+            <if test="masterOrder != null">#{masterOrder},</if>
+            <if test="branchOrder != null">#{branchOrder},</if>
+            <if test="quantity != null">#{quantity},</if>
+            <if test="productQuantity != null">#{productQuantity},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="tradeWayId != null">#{tradeWayId},</if>
+            <if test="manualNumber != null">#{manualNumber},</if>
+            <if test="currencyId != null">#{currencyId},</if>
+            <if test="amountDeclared != null">#{amountDeclared},</if>
+            <if test="certificateNameC != null">#{certificateNameC},</if>
+            <if test="checkId != null">#{checkId},</if>
+            <if test="tax != null">#{tax},</if>
+            <if test="customsCode != null">#{customsCode},</if>
+            <if test="orderDate != null">#{orderDate},</if>
+            <if test="releaseDate != null">#{releaseDate},</if>
+            <if test="serialNumber != null">#{serialNumber},</if>
+            <if test="fleetId != null">#{fleetId},</if>
+            <if test="customsBrokerId != null">#{customsBrokerId},</if>
+            <if test="flightNumber != null">#{flightNumber},</if>
+            <if test="dispatchNumber != null">#{dispatchNumber},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysImportOrder" parameterType="SysImportOrder">
+        update sys_import_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orgId != null">org_id = #{orgId},</if>
+            <if test="masterOrder != null">master_order = #{masterOrder},</if>
+            <if test="branchOrder != null">branch_order = #{branchOrder},</if>
+            <if test="quantity != null">quantity = #{quantity},</if>
+            <if test="productQuantity != null">product_quantity = #{productQuantity},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="tradeWayId != null">trade_way_id = #{tradeWayId},</if>
+            <if test="manualNumber != null">manual_number = #{manualNumber},</if>
+            <if test="currencyId != null">currency_id = #{currencyId},</if>
+            <if test="amountDeclared != null">amount_declared = #{amountDeclared},</if>
+            <if test="certificateNameC != null">certificate_name_c = #{certificateNameC},</if>
+            <if test="checkId != null">check_id = #{checkId},</if>
+            <if test="tax != null">tax = #{tax},</if>
+            <if test="customsCode != null">customs_code = #{customsCode},</if>
+            <if test="orderDate != null">order_date = #{orderDate},</if>
+            <if test="releaseDate != null">release_date = #{releaseDate},</if>
+            <if test="serialNumber != null">serial_number = #{serialNumber},</if>
+            <if test="fleetId != null">fleet_id = #{fleetId},</if>
+            <if test="customsBrokerId != null">customs_broker_id = #{customsBrokerId},</if>
+            <if test="flightNumber != null">flight_number = #{flightNumber},</if>
+            <if test="dispatchNumber != null">dispatch_number = #{dispatchNumber},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            update_time = sysdate()
+        </trim>
+        where import_order_id = #{importOrderId}
+    </update>
+
+    <delete id="deleteSysImportOrderByImportOrderId" parameterType="Long">
+        delete from sys_import_order where import_order_id = #{importOrderId}
+    </delete>
+
+    <delete id="deleteSysImportOrderByImportOrderIds" parameterType="String">
+        delete from sys_import_order where import_order_id in 
+        <foreach item="importOrderId" collection="array" open="(" separator="," close=")">
+            #{importOrderId}
+        </foreach>
+    </delete>
+
+    <select id="selectSysImportOrderByMasterOrderAndBranchOrder" parameterType="SysImportOrder" resultMap="SysImportOrderResult">
+        <include refid="selectSysImportOrderVo"/>
+        <where>
+            <if test="masterOrder != null  and masterOrder != ''"> and io.master_order = #{masterOrder}</if>
+            <if test="branchOrder != null  and branchOrder != ''"> and io.branch_order = #{branchOrder}</if>
+        </where>
+    </select>
+</mapper>

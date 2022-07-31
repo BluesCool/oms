@@ -61,6 +61,12 @@
             <artifactId>oms-generator</artifactId>
         </dependency>
 
+        <!-- 业务模块-->
+        <dependency>
+            <groupId>com.ydgj.oms</groupId>
+            <artifactId>oms-business</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

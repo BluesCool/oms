@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydgj.oms.system.mapper.SysCurrencyMapper">
+    
+    <resultMap type="SysCurrency" id="SysCurrencyResult">
+        <result property="currencyId"    column="currency_id"    />
+        <result property="currencyName"    column="currency_name"    />
+        <result property="currencyCode"    column="currency_code"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysCurrencyVo">
+        select currency_id, currency_name, currency_code, create_by, create_time, update_by, update_time, remark from sys_currency
+    </sql>
+
+    <select id="selectSysCurrencyList" parameterType="SysCurrency" resultMap="SysCurrencyResult">
+        <include refid="selectSysCurrencyVo"/>
+        <where>  
+            <if test="currencyName != null  and currencyName != ''"> and currency_name like concat('%', #{currencyName}, '%')</if>
+            <if test="currencyCode != null  and currencyCode != ''"> and currency_code = #{currencyCode}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysCurrencyByCurrencyId" parameterType="Long" resultMap="SysCurrencyResult">
+        <include refid="selectSysCurrencyVo"/>
+        where currency_id = #{currencyId}
+    </select>
+        
+    <insert id="insertSysCurrency" parameterType="SysCurrency" useGeneratedKeys="true" keyProperty="currencyId">
+        insert into sys_currency
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="currencyName != null">currency_name,</if>
+            <if test="currencyCode != null">currency_code,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="currencyName != null">#{currencyName},</if>
+            <if test="currencyCode != null">#{currencyCode},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysCurrency" parameterType="SysCurrency">
+        update sys_currency
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="currencyName != null">currency_name = #{currencyName},</if>
+            <if test="currencyCode != null">currency_code = #{currencyCode},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where currency_id = #{currencyId}
+    </update>
+
+    <delete id="deleteSysCurrencyByCurrencyId" parameterType="Long">
+        delete from sys_currency where currency_id = #{currencyId}
+    </delete>
+
+    <delete id="deleteSysCurrencyByCurrencyIds" parameterType="String">
+        delete from sys_currency where currency_id in 
+        <foreach item="currencyId" collection="array" open="(" separator="," close=")">
+            #{currencyId}
+        </foreach>
+    </delete>
+
+    <select id="selectCurrencyAll" resultMap="SysCurrencyResult">
+        <include refid="selectSysCurrencyVo"/>
+    </select>
+
+    <select id="selectSysCurrencyByCurrencyName" parameterType="String" resultMap="SysCurrencyResult">
+        <include refid="selectSysCurrencyVo"/>
+        where currency_code = #{currencyCode}
+    </select>
+</mapper>

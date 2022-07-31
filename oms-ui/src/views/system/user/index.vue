@@ -565,6 +565,7 @@ export default {
       getUser().then(response => {
         this.postOptions = response.posts;
         this.roleOptions = response.roles;
+        debugger;
         this.open = true;
         this.title = "添加用户";
         this.form.password = this.initPassword;

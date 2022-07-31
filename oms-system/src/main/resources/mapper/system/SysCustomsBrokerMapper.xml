@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydgj.oms.system.mapper.SysCustomsBrokerMapper">
+    
+    <resultMap type="SysCustomsBroker" id="SysCustomsBrokerResult">
+        <result property="customsBrokerId"    column="customs_broker_id"    />
+        <result property="customsBrokerName"    column="customs_broker_name"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysCustomsBrokerVo">
+        select customs_broker_id, customs_broker_name, create_by, create_time, update_by, update_time, remark from sys_customs_broker
+    </sql>
+
+    <select id="selectSysCustomsBrokerList" parameterType="SysCustomsBroker" resultMap="SysCustomsBrokerResult">
+        <include refid="selectSysCustomsBrokerVo"/>
+        <where>  
+            <if test="customsBrokerName != null  and customsBrokerName != ''"> and customs_broker_name like concat('%', #{customsBrokerName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectSysCustomsBrokerByCustomsBrokerId" parameterType="Long" resultMap="SysCustomsBrokerResult">
+        <include refid="selectSysCustomsBrokerVo"/>
+        where customs_broker_id = #{customsBrokerId}
+    </select>
+        
+    <insert id="insertSysCustomsBroker" parameterType="SysCustomsBroker" useGeneratedKeys="true" keyProperty="customsBrokerId">
+        insert into sys_customs_broker
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customsBrokerName != null">customs_broker_name,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customsBrokerName != null">#{customsBrokerName},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysCustomsBroker" parameterType="SysCustomsBroker">
+        update sys_customs_broker
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="customsBrokerName != null">customs_broker_name = #{customsBrokerName},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where customs_broker_id = #{customsBrokerId}
+    </update>
+
+    <delete id="deleteSysCustomsBrokerByCustomsBrokerId" parameterType="Long">
+        delete from sys_customs_broker where customs_broker_id = #{customsBrokerId}
+    </delete>
+
+    <delete id="deleteSysCustomsBrokerByCustomsBrokerIds" parameterType="String">
+        delete from sys_customs_broker where customs_broker_id in 
+        <foreach item="customsBrokerId" collection="array" open="(" separator="," close=")">
+            #{customsBrokerId}
+        </foreach>
+    </delete>
+
+    <select id="selectCustomsBrokerAll" resultMap="SysCustomsBrokerResult">
+        <include refid="selectSysCustomsBrokerVo"/>
+    </select>
+
+    <select id="selectSysCustomsBrokerByCustomsBrokerName" parameterType="String" resultMap="SysCustomsBrokerResult">
+        <include refid="selectSysCustomsBrokerVo"/>
+        where customs_broker_name = #{customsBrokerName}
+    </select>
+</mapper>

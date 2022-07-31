@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydgj.oms.system.mapper.SysOrgMapper">
+    
+    <resultMap type="SysOrg" id="SysOrgResult">
+        <result property="orgId"    column="org_id"    />
+        <result property="orgName"    column="org_name"    />
+        <result property="orgShort"    column="org_short"    />
+        <result property="address"    column="address"    />
+        <result property="postCode"    column="post_code"    />
+        <result property="telephone"    column="telephone"    />
+        <result property="description"    column="description"    />
+        <result property="corporation"    column="corporation"    />
+        <result property="corporationPhone"    column="corporation_phone"    />
+        <result property="corporationIdCard"    column="corporation_id_card"    />
+        <result property="registeredAddress"    column="registered_address"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="county"    column="county"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysOrgVo">
+        select org_id, org_name, org_short, address, post_code, telephone, description, corporation, corporation_phone, corporation_id_card, registered_address, province, city, county, create_by, create_time, update_by, update_time, remark from sys_org
+    </sql>
+
+    <select id="selectSysOrgList" parameterType="SysOrg" resultMap="SysOrgResult">
+        <include refid="selectSysOrgVo"/>
+        <where>  
+            <if test="orgName != null  and orgName != ''"> and org_name like concat('%', #{orgName}, '%')</if>
+            <if test="orgShort != null  and orgShort != ''"> and org_short = #{orgShort}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="postCode != null  and postCode != ''"> and post_code = #{postCode}</if>
+            <if test="telephone != null  and telephone != ''"> and telephone = #{telephone}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="corporation != null  and corporation != ''"> and corporation = #{corporation}</if>
+            <if test="corporationPhone != null  and corporationPhone != ''"> and corporation_phone = #{corporationPhone}</if>
+            <if test="corporationIdCard != null  and corporationIdCard != ''"> and corporation_id_card = #{corporationIdCard}</if>
+            <if test="registeredAddress != null  and registeredAddress != ''"> and registered_address = #{registeredAddress}</if>
+            <if test="province != null "> and province = #{province}</if>
+            <if test="city != null "> and city = #{city}</if>
+            <if test="county != null "> and county = #{county}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysOrgByOrgId" parameterType="Long" resultMap="SysOrgResult">
+        <include refid="selectSysOrgVo"/>
+        where org_id = #{orgId}
+    </select>
+        
+    <insert id="insertSysOrg" parameterType="SysOrg" useGeneratedKeys="true" keyProperty="orgId">
+        insert into sys_org
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orgName != null">org_name,</if>
+            <if test="orgShort != null">org_short,</if>
+            <if test="address != null">address,</if>
+            <if test="postCode != null">post_code,</if>
+            <if test="telephone != null">telephone,</if>
+            <if test="description != null">description,</if>
+            <if test="corporation != null">corporation,</if>
+            <if test="corporationPhone != null">corporation_phone,</if>
+            <if test="corporationIdCard != null">corporation_id_card,</if>
+            <if test="registeredAddress != null">registered_address,</if>
+            <if test="province != null">province,</if>
+            <if test="city != null">city,</if>
+            <if test="county != null">county,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orgName != null">#{orgName},</if>
+            <if test="orgShort != null">#{orgShort},</if>
+            <if test="address != null">#{address},</if>
+            <if test="postCode != null">#{postCode},</if>
+            <if test="telephone != null">#{telephone},</if>
+            <if test="description != null">#{description},</if>
+            <if test="corporation != null">#{corporation},</if>
+            <if test="corporationPhone != null">#{corporationPhone},</if>
+            <if test="corporationIdCard != null">#{corporationIdCard},</if>
+            <if test="registeredAddress != null">#{registeredAddress},</if>
+            <if test="province != null">#{province},</if>
+            <if test="city != null">#{city},</if>
+            <if test="county != null">#{county},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysOrg" parameterType="SysOrg">
+        update sys_org
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orgName != null">org_name = #{orgName},</if>
+            <if test="orgShort != null">org_short = #{orgShort},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="postCode != null">post_code = #{postCode},</if>
+            <if test="telephone != null">telephone = #{telephone},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="corporation != null">corporation = #{corporation},</if>
+            <if test="corporationPhone != null">corporation_phone = #{corporationPhone},</if>
+            <if test="corporationIdCard != null">corporation_id_card = #{corporationIdCard},</if>
+            <if test="registeredAddress != null">registered_address = #{registeredAddress},</if>
+            <if test="province != null">province = #{province},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="county != null">county = #{county},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where org_id = #{orgId}
+    </update>
+
+    <delete id="deleteSysOrgByOrgId" parameterType="Long">
+        delete from sys_org where org_id = #{orgId}
+    </delete>
+
+    <delete id="deleteSysOrgByOrgIds" parameterType="String">
+        delete from sys_org where org_id in 
+        <foreach item="orgId" collection="array" open="(" separator="," close=")">
+            #{orgId}
+        </foreach>
+    </delete>
+
+    <select id="selectOrgAll" resultMap="SysOrgResult">
+        <include refid="selectSysOrgVo"/>
+    </select>
+
+    <select id="selectSysOrgByOrgName" parameterType="String" resultMap="SysOrgResult">
+        <include refid="selectSysOrgVo"/>
+        where org_name like concat('%', #{orgName}, '%')
+    </select>
+</mapper>

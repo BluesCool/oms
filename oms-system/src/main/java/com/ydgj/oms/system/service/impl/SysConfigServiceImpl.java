@@ -51,7 +51,7 @@ public class SysConfigServiceImpl implements ISysConfigService
     public SysConfig selectConfigById(Long configId)
     {
         SysConfig config = new SysConfig();
-        config.setConfigId(configId);
+        config.setConfigId(configId);//车牌
         return configMapper.selectConfig(config);
     }
 

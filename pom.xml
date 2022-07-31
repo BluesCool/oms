@@ -179,6 +179,13 @@
                 <version>${oms.version}</version>
             </dependency>
 
+            <!-- 业务模块-->
+            <dependency>
+                <groupId>com.ydgj.oms</groupId>
+                <artifactId>oms-business</artifactId>
+                <version>${oms.version}</version>
+            </dependency>
+
             <!-- 通用工具-->
             <dependency>
                 <groupId>com.ydgj.oms</groupId>
@@ -196,6 +203,7 @@
         <module>oms-quartz</module>
         <module>oms-generator</module>
         <module>oms-common</module>
+        <module>oms-business</module>
     </modules>
     <packaging>pom</packaging>
 

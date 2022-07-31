@@ -146,6 +146,7 @@ public class TokenService
         // 根据uuid将loginUser缓存
         String userKey = getTokenKey(loginUser.getToken());
         redisCache.setCacheObject(userKey, loginUser, expireTime, TimeUnit.MINUTES);
+//        redisCache.setCacheObject(userKey, loginUser);
     }
 
     /**

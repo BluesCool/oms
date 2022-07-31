@@ -84,3 +84,14 @@ new Vue({
   store,
   render: h => h(App)
 })
+
+Element.Table.props.stripe = {
+  default:true,
+  type:Boolean
+}
+
+// 带有边框
+Element.Table.props.border = {
+  default:true,
+  type:Boolean
+}

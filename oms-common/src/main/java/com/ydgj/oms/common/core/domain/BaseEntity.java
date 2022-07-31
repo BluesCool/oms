@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ydgj.oms.common.annotation.Excel;
 
 /**
  * Entity基类
@@ -33,6 +34,7 @@ public class BaseEntity implements Serializable
     private Date updateTime;
 
     /** 备注 */
+    @Excel(name = "备注",sort = 99)
     private String remark;
 
     /** 请求参数 */
